@@ -27,10 +27,6 @@ and then run
 "python manage.py migrate"
 
 ```
-run 
-```
-python manage.py runrtmclient 
-```
 set the following environment variables with "bot access token" and channel name as shown below
 ```
 export CHANNEL_NAME='channel_name';
