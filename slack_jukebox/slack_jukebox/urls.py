@@ -25,6 +25,6 @@ urlpatterns = [
     re_path(r'^login/$', LoginView.as_view(), name='login'),
     re_path(r'^logout/$', LogoutView.as_view(), name='logout'),
     path('upvote', upvote),
-    path('signup', signup),
+    path('signup', signup, name='signup'),
     # re_path(r'^upvote/(?P<id>[0-9].)$')
 ]
