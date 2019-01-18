@@ -31,6 +31,13 @@ run
 ```
 python manage.py runrtmclient 
 ```
+set the following environment variables with "bot access token" and channel name as shown below
+```
+export CHANNEL_NAME='channel_name';
+
+export SLACK_BOT_TOKEN='xoxb-52188xxxxxxx-xxxxxxxxxxx-xxxxxxxxxxxxLjTFbS';
+
+```
 to start websocket client to receive messages from Slack RTM
 
 ```
