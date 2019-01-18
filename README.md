@@ -40,12 +40,17 @@ export SLACK_BOT_TOKEN='xoxb-52188xxxxxxx-xxxxxxxxxxx-xxxxxxxxxxxxLjTFbS';
 ```
 to start websocket client to receive messages from Slack RTM
 
-```
 run
 
 ```
-python manage.py runserver
+python manage.py runrtmclient 
 
+```
+
+run 
+
+```
+python manage.py runserver
 ```
 
 to start the server
