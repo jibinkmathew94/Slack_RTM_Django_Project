@@ -34,7 +34,7 @@ export CHANNEL_NAME='channel_name';
 export SLACK_BOT_TOKEN='xoxb-52188xxxxxxx-xxxxxxxxxxx-xxxxxxxxxxxxLjTFbS';
 
 ```
-to start websocket client to receive messages from Slack RTM
+to start websocket client to receive messages from Slack RTM,
 
 run
 
@@ -42,11 +42,13 @@ run
 python manage.py runrtmclient 
 
 ```
+in one terminal window
 
-run 
+
+and run 
 
 ```
 python manage.py runserver
 ```
 
-to start the server
+in other terminal window to start the server
