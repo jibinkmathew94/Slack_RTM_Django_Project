@@ -17,6 +17,13 @@
 	width:10px;
 }
 
+.active{
+	border-bottom: 10px solid #cb4154;
+	border-right: 10px solid transparent;
+	border-left: 10px solid transparent;
+	width:10px;
+}
+
 .upvote:hover{
 	border-bottom: 10px solid #cb4154;
 }
@@ -31,4 +38,44 @@
 	font-size: 1em;
 	color: #606060;
 	border-left: 1px solid rgb(204, 204, 204);
+}
+
+.upvote-list-container{
+	position: fixed;
+	left:50%;
+	top:200px;
+	width:50%;
+	text-align: center;
+	display: none;
+	z-index: 999999;
+	border-radius: 10px;
+
+}
+
+.upvote-list{
+	position: relative;
+	top:100px;
+	left:-50%;
+	width:100%;
+	background-color: #ffff;
+	border-radius: 10px;
+	min-height: 200px;
+	font-size: 1.4em;
+	box-shadow: 5px 10px 50px 5px #D3D3D3;
+}
+
+.supreme-container{
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px);
+}
+
+.upvote-names{
+}
+
+.heading{
+	background-color: lightblue;
+	font-size: 1.3em;
 }

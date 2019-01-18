@@ -4,12 +4,21 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static "video_upvote/css/home-1.0.css" %}">
 <script type="text/javascript" src="{% static "video_upvote/js/home-1.0.js" %}"></script>
-<div class ="container-fluid main-content">
-	{% for video in videos %}
-		<div class="video-card col-md-6 offset-md-1 p-3">
+{% csrf_token %}
+<div class ="container-fluid main-content row">
+	<div class="col-md-5" >
+		<div id="player"></div>
+	</div>
+	<div class="col-md-6 ml-4 offset-md-6">
+		{% for video in videos %}
+			<div class="video-card col-md-12 offset-md-1 p-3">
 				<div class="row">
 					<div class="col-1">
-						<div class="upvote" data-id="{{ video.video_id }}" onclick="upvote(event)"></div>
+						{% if user in video.upvotes.all %} <!-- display already upvoted videos -->
+							<div class="active" data-id="{{ video.video_id }}" onclick="upvote(event)"></div>
+						{% else %}
+							<div class="upvote" data-id="{{ video.video_id }}" onclick="upvote(event)"></div>
+						{% endif %}
 					</div>
 					<div class="col-3">
 						<img class="thumbnail" src="{{ video.thumbnail_url }}">
@@ -18,12 +27,47 @@
 						{{ video.title }}
 					</div>
 				</div>
+				<div class="count pb-0 pt-2"> <!-- upvote count -->
+					<a href="" data-target="{{ video.video_id }}" onclick="showUpvotes(event)">{{ video.upvotes.all.count }} upvotes</a> 
+				</div>
 			</div>
-		</div>
-	{% endfor %}
+			<div class="upvote-list-container" id="{{ video.video_id }}">
+				<div class="upvote-list p-5"> <!-- list of people upvoted -->
+					<div class="heading">Upvoted by</div>
+						{% for user in video.upvotes.all %}
+							<div class="upvote-names">{{ user.username }}</div>
+						{% endfor %}
+				</div>
+			</div>
+		{% endfor %}
+	</div>
 </div>
-{% endblock %}
+<script type="text/javascript">
+	// javascript for playing youtube videos
+	video_array = [ {% for video in videos %} '{{ video.video_id }}',{% endfor %} ] // creating array of video id's
+	var tag = document.createElement('script');
+	tag.src = "https://www.youtube.com/iframe_api";
+	var currentItem = 0; //first video
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  	player = '';
+  	function onYouTubeIframeAPIReady() {
+  		player = new YT.Player('player', {
+   		height: '390',
+    	width: '640',
+    	videoId: video_array[currentItem++],
+ 		events: {
+          'onStateChange': onPlayerStateChange
+        }
+    });
 
-<div class="header p-2">
-				<span class="title">{{ video.title }}</span>
-			</div>
+  function onPlayerStateChange(state){
+  	console.log(state.data);
+  	if(state.data === 0){ //play next video when the current one stops
+  		console.log("challa");
+		player.loadVideoById(video_array[currentItem++]);
+  	}
+  }
+} 
+</script>
+{% endblock %}
